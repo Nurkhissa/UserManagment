@@ -11,11 +11,19 @@ namespace UserManagment
 
             User user = new User
             {
-                UserName= "Test",
-                Password="123456"
+                UserName = "Test",
+                Password = "123456"
             };
-            broker.AddUser(user);
+            //broker.AddUser(user);
 
+            if (broker.CheckForExist("Test", "123456"))
+            {
+                Console.WriteLine("Good");
+            }
+            else
+            {
+                Console.WriteLine("Invalid");
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ namespace UserManagment.Brokers
     {
         public static string FilePath = "~/../../../../Assets/Data.txt";
 
+        
+
         public StorageBroker() 
         {
             EnsureFileExsists();
@@ -19,6 +21,28 @@ namespace UserManagment.Brokers
 
             return user;
 
+        }
+
+        public bool CheckForExist(string username, string password)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(FilePath);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split('-');
+                    if (parts.Length == 2 && parts[0].Trim() == username && parts[1].Trim() == password)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($" Error  {ex.Message}");
+                return false;
+            }
         }
 
         public void EnsureFileExsists()
